@@ -13,7 +13,7 @@ This browser plugin adds a button to backpack.tf listings, which will instantly 
 ### Installation
 
 - Install [Tampermonkey](https://www.tampermonkey.net/)
-- [Open the script](https://github.com/peleicht/backpack-offer-sender/raw/main/offer_sender.user.js)
+- [Open the script](https://github.com/HavishH/backpack-offer-sender/raw/main/offer_sender.user.js)
 - Click Install
 
 ### Usage
