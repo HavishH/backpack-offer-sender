@@ -47,9 +47,54 @@ async function main() {
 				.replace("\n", " ")
 				.replace(/ #\d+$/, ""); //\n and # dont work in urls
 
+			
 			const info = document.querySelector("#" + order.id + " > div.listing-item > div");
-			const price = info.getAttribute("data-listing_price");
+			let price = info.getAttribute("data-listing_price");
 
+			// round ref value to nearest 0.11
+			const RoundRefValue = (refinedValue, isBuy) => {
+				const integerPart = Math.floor(refinedValue);
+				const fractionalPart = refinedValue - integerPart;
+				const step = 0.11;
+				let roundedFractional;
+				
+				if (isBuy) {
+					roundedFractional = Math.floor(fractionalPart / step) * step;
+				} else {
+					roundedFractional = Math.ceil(fractionalPart / step) * step;
+				}
+				
+				if (roundedFractional > 0.95) {
+					return parseFloat((integerPart + 1).toFixed(2));
+				}
+				
+				return parseFloat((integerPart + roundedFractional).toFixed(2));
+			};
+
+			// checks if 'ref' exists and rounds it to nearest 0.11
+			if (price.includes("ref")) {
+				let refValue = 0;
+				const isBuy = info.getAttribute("data-listing_intent") == "buy";
+
+				
+				if (price.includes("key")) {
+					const refPrice = price.split(' ')[2];
+					refValue = parseFloat(refPrice);
+				} else {
+					const refPrice = price.split(' ')[0];
+					refValue = parseFloat(refPrice);
+				}
+
+				// assigns rounded ref value to price
+				refValue = RoundRefValue(refValue, isBuy);
+				if (price.includes("key")) {
+					price = price.replace(price.split(' ')[2], refValue.toString());
+				} else {
+					price = price.replace(price.split(' ')[0], refValue.toString());
+				}
+				console.log(price)
+			}
+			
 			//ignore specific buy orders
 			let item_id_text = "";
 			if (info.getAttribute("data-listing_intent") == "buy") {
