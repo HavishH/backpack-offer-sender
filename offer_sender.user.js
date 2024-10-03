@@ -92,7 +92,6 @@ async function main() {
 				} else {
 					price = price.replace(price.split(' ')[0], refValue.toString());
 				}
-				console.log(price)
 			}
 			
 			//ignore specific buy orders
