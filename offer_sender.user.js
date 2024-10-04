@@ -202,7 +202,50 @@ async function main() {
 
 				const info = listing.children[0].children[0];
 				const listing_id = info.getAttribute("href").replace("/classifieds/", "");
-				const price = listings_data.find(l => l.id == listing_id).value.long;
+				let price = listings_data.find(l => l.id == listing_id).value.long;
+
+				
+				// round ref value to nearest 0.11
+				const RoundRefValue = (refinedValue, isBuy) => {
+					const integerPart = Math.floor(refinedValue);
+					const fractionalPart = refinedValue - integerPart;
+					const step = 0.11;
+					let roundedFractional;
+					
+					if (isBuy) {
+						roundedFractional = Math.floor(fractionalPart / step) * step;
+					} else {
+						roundedFractional = Math.ceil(fractionalPart / step) * step;
+					}
+					
+					if (roundedFractional > 0.95) {
+						return parseFloat((integerPart + 1).toFixed(2));
+					}
+					
+					return parseFloat((integerPart + roundedFractional).toFixed(2));
+				};
+
+				// checks if 'ref' exists and rounds it to nearest 0.11
+				if (price.includes("ref")) {
+					let refValue = 0;
+					const isBuy = info.getAttribute("data-listing_intent") == "buy";
+
+					
+					if (price.includes("key")) {
+						const refPrice = price.split(' ')[2];
+						refValue = parseFloat(refPrice);
+					} else {
+						const refPrice = price.split(' ')[0];
+						refValue = parseFloat(refPrice);
+					}
+					// assigns rounded ref value to price
+					refValue = RoundRefValue(refValue, isBuy);
+					if (price.includes("key")) {
+						price = price.replace(price.split(' ')[2], refValue.toString());
+					} else {
+						price = price.replace(price.split(' ')[0], refValue.toString());
+					}
+				}
 
 				//ignore buy orders on specific items
 				let item_id_text = "";
