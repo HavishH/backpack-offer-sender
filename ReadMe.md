@@ -1,4 +1,11 @@
-# One-Click Offer for Backpack.tf
+# A fork of backpack-offer-sender that automatically rounds ref values to the nearest 0.11
+
+
+- This fork will apply an additional 0.05 ref (equivalent to one weapon) to bots that list items with prices not divisible by 0.11.
+- When purchasing items, it rounds the ref values up to the nearest 0.11 increment. For example, an item with a ref value of 1.16 will be rounded to 1.22.
+- When selling items, it rounds the ref values down to the nearest 0.11 increment. For example, an item with a ref value of 1.16 will be rounded to 1.11.
+
+## One-Click Offer for Backpack.tf
 
 This browser plugin adds a button to backpack.tf listings, which will instantly send your offer as specified by the listing.
 
