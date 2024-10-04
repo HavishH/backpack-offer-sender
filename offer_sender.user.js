@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name         One-Click Offer
-// @namespace    https://github.com/peleicht/backpack-offer-sender
-// @homepage     https://github.com/peleicht
+// @namespace    https://github.com/HavishH/backpack-offer-sender
+// @homepage     https://github.com/HavishH
 // @version      1.3.2
 // @description  Adds a button on backpack.tf listings that instantly sends the offer.
 // @author       Brom127
-// @updateURL    https://github.com/peleicht/backpack-offer-sender/raw/main/offer_sender.user.js
-// @downloadURL  https://github.com/peleicht/backpack-offer-sender/raw/main/offer_sender.user.js
+// @updateURL    https://github.com/HavishH/backpack-offer-sender/raw/main/offer_sender.user.js
+// @downloadURL  https://github.com/HavishH/backpack-offer-sender/raw/main/offer_sender.user.js
 // @match        *://backpack.tf/stats/*
 // @match        *://backpack.tf/classifieds*
 // @match        *://backpack.tf/u/*
