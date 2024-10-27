@@ -85,12 +85,14 @@ async function main() {
 					refValue = parseFloat(refPrice);
 				}
 
-				// assigns rounded ref value to price
-				refValue = RoundRefValue(refValue, isBuy);
-				if (price.includes("key")) {
-					price = price.replace(price.split(' ')[2], refValue.toString());
-				} else {
-					price = price.replace(price.split(' ')[0], refValue.toString());
+				if (refValue % 0.11 > 0.1) {
+					// assigns rounded ref value to price
+					refValue = RoundRefValue(refValue, isBuy);
+					if (price.includes("key")) {
+						price = price.replace(price.split(' ')[2], refValue.toString());
+					} else {
+						price = price.replace(price.split(' ')[0], refValue.toString());
+					}
 				}
 			}
 			
@@ -238,12 +240,15 @@ async function main() {
 						const refPrice = price.split(' ')[0];
 						refValue = parseFloat(refPrice);
 					}
-					// assigns rounded ref value to price
-					refValue = RoundRefValue(refValue, isBuy);
-					if (price.includes("key")) {
-						price = price.replace(price.split(' ')[2], refValue.toString());
-					} else {
-						price = price.replace(price.split(' ')[0], refValue.toString());
+					
+					if (refValue % 0.11 > 0.1) {
+						// assigns rounded ref value to price
+						refValue = RoundRefValue(refValue, isBuy);
+						if (price.includes("key")) {
+							price = price.replace(price.split(' ')[2], refValue.toString());
+						} else {
+							price = price.replace(price.split(' ')[0], refValue.toString());
+						}
 					}
 				}
 
